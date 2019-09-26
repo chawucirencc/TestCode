@@ -421,7 +421,8 @@ def operating_mysql():
 
 
 def operating_mongodb():
-
+    mydb = pymongo.MongoClient('localhost', 27017)
+    
     pass
 
 def time_test():
