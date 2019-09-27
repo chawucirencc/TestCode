@@ -458,10 +458,13 @@ def operating_redis():
     
 
 def write_in_redis(key_name: str, value: list):
+    """
+    写入数据到redis。
+    """
     pool = redis.ConnectionPool(host='localhost', port=6379, decode_responses=True)
     r = redis.Redis(connection_pool=pool)
     for l in value:
-        r.sadd(key_name, l)
+        r.sadd(key_name, l)     # 往集合中添加数据
 
 
 def operating_mysql():
