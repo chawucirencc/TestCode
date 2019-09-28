@@ -239,6 +239,9 @@ class Cl2(Cl1):
 
 
 def catch_error():
+    """
+    错误捕获...
+    """
     try:
         pass
     except Exception as e:
@@ -247,6 +250,7 @@ def catch_error():
 def paixu():
     """
     排序.....
+    关于sorted()和a.sort()的用法...
     """
     a = [1, 8, 3, 5, 3, 0, 6, 9]
     # a.sort()
@@ -293,7 +297,7 @@ def find_fun_num(l: list, n):
 
 def fib(n):
     """
-    数列...
+    斐波那契数列...
     """
     a, b = 0, 1
     for i in range(n):
@@ -398,10 +402,11 @@ def topology_sort(l: list):
         print("l is not list type")
 
 
-def binary_computer(l: int):
+def binary_computer(a: int, b: int):
     """
     二进制计算
     """
+
     pass
 
 
@@ -421,6 +426,9 @@ def change_add(s: str):
     
 
 def creatr_thing():
+    """
+    mysql查询...
+    """
     try:
         db = pymysql.connect(host='localhost', user='root', password='password', database='world')
         db.autocommit(True)
@@ -438,6 +446,9 @@ def creatr_thing():
     
 
 def operating_redis():
+    """
+    操作redis...
+    """
     try:
         pool = redis.ConnectionPool(host='localhost', port=6379, decode_responses=True)
         r = redis.Redis(connection_pool=pool)
@@ -459,7 +470,7 @@ def operating_redis():
 
 def write_in_redis(key_name: str, value: list):
     """
-    写入数据到redis。
+    写入数据到redis(辅助函数)
     """
     pool = redis.ConnectionPool(host='localhost', port=6379, decode_responses=True)
     r = redis.Redis(connection_pool=pool)
@@ -468,6 +479,9 @@ def write_in_redis(key_name: str, value: list):
 
 
 def operating_mysql():
+    """
+    操作mysql...
+    """
     try:
         db = pymysql.connect(host='localhost', user='root', password='password', database='world')
         db.autocommit(True)
@@ -483,6 +497,9 @@ def operating_mysql():
 
 
 def operating_mongodb():
+    """
+    操作mongodb...
+    """
     try:
         myclinent = pymongo.MongoClient('localhost', 27017)
         mydb = myclinent.dytt_movie	# 连接到数据库
