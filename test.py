@@ -14,6 +14,7 @@ import objgraph
 import datetime
 import requests
 import threading
+import matplotlib.pyplot as plt
 from lxml import etree
 from pathlib import Path
 from bs4 import BeautifulSoup
@@ -21,6 +22,7 @@ from selenium import webdriver
 from collections import Counter
 from fake_useragent import UserAgent
 from decimal import Decimal, ROUND_HALF_UP
+from selenium.webdriver.common.keys import Keys
 
 
 def path():
@@ -468,7 +470,7 @@ def operating_redis():
         print(err)
     
 
-def write_in_redis(key_name: str, value: list):
+def write_in_redis(key_nae: str, value: list):
     """
     写入数据到redis(辅助函数)
     """
@@ -553,11 +555,39 @@ def mutil_process():
     # t2.join()
 
 
+def sele():
+    driver = webdriver.Chrome()
+    driver.get("https://www.baidu.com/")
+    # driver.close()
+    time.sleep(5)
+    # driver.refresh()
+    # element = driver.find_element_by_link_text("新闻")
+    driver.find_element_by_id("kw").send_keys("seleniumm")
+    driver.find_element_by_id("kw").send_keys(Keys.BACK_SPACE)
+    driver.find_element_by_id("kw").send_keys(Keys.SPACE)
+    driver.find_element_by_id("kw").send_keys("教程")
+    driver.find_element_by_id("su").send_keys(Keys.ENTER)
+    driver.find_element_by_id()
+    driver.quit()
+    
+    
+class WordFrequency():
+    def page_info(self, url):
+        try:
+            pass
+        except Exception as err:
+            print("error", err)
+            
+        pass
+    def main(self):
+        url = " "
+        pass
+
 def main():
     t1 = time.time()
     l = [1, 2, 12, 14, 54, 9, 0, 10, 12, 11]
     # s = '+-+++-+++---+-+-++++--'
-    fib(200)
+    sele()
     t2 = time.time() - t1
     print(t2)
 
