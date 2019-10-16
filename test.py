@@ -594,7 +594,7 @@ class Hash:
         self.load_factor = 0.75
         
     def hash(self, k, i):
-        # Hash函数。
+        # Hash函数（映射函数）。
         h_value = (k+i) % self.capacity
         if self.hash_table[h_value][0]==k:
             return h_value
