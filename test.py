@@ -277,19 +277,32 @@ def time_complex():
     print(t2)
 
 
-def find_fun_num(l: list, n):
+def find_fun_num(l: list, b: int, e: int, f: int):
     """
-    二分算法.....
+    二分查找算法.....
+    b 为列表第一个元素索引位置。
+    e 为列表元素最后一个索引的位置。
+    n 为要查找的元素
 
     """
     if isinstance(l, list):
         if len(l) != 0:
             l.sort()
             # print(len(l))
-            mid = Decimal(3)
+            # print(l)
+            mid = Decimal((b+e)/2)
             mid = mid.quantize(Decimal('0'), rounding=ROUND_HALF_UP)    # 消除逢5不进的情况。
-            if l[mid] == n:
-                return n
+            if l[int(mid)] == f:
+                print(f)
+                print(l.index(f))
+                print(mid)
+            elif mid < f:
+                print(find_fun_num(l, mid, e, f))
+            else:
+                print(find_fun_num(l, b, mid, f))
+                
+            
+                
             
         else:
             print("列表长度为0：")
@@ -628,14 +641,39 @@ class Hash:
         return self.hash_table[hash_v][1]
                   
 
+def binarySearch(arr,beg,end,item):  
+    """
+    二分查找算法。（网上版本）参考，对于无序数组或者列表支持不佳。
+    """
+    arr.sort()
+    if end >= beg:  
+        mid = int((beg+end)/2)  
+        if arr[mid] == item :  
+            return mid+1  
+        elif arr[mid] < item :   
+            return binarySearch(arr,mid+1,end,item)  
+        else:   
+            return binarySearch(arr,beg,mid-1,item)  
+    return -1  
+
+
+def find_er_num():
+    item = int(input("Enter the item which you want to search ?"))  
+    arr=[16, 19, 20, 23, 45, 56, 78, 90, 96, 100];  
+    l = [1, 2, 12, 14, 54, 9, 0, 10, 12, 11]
+    location = -1;   
+    location = binarySearch(l,0,8,item);  
+    if location != -1:   
+        print("Item found at location %d" %(location))  
+    else:   
+        print("Item not found")
+
+
 def main():
     t1 = time.time()
     l = [1, 2, 12, 14, 54, 9, 0, 10, 12, 11]
     # s = '+-+++-+++---+-+-++++--'
-    hash = Hash()
-    hash.put(1, "World")
-    print(hash.get(1))
-    a = dict
+    find_er_num()
     t2 = time.time() - t1
     print(t2)
 
