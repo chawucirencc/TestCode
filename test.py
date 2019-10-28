@@ -483,7 +483,7 @@ def operating_redis():
         print(err)
     
 
-def write_in_redis(key_nae: str, value: list):
+def write_in_redis(key_name: str, value: list):
     """
     写入数据到redis(辅助函数)
     """
