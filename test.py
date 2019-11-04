@@ -669,6 +669,51 @@ def find_er_num():
         print("Item not found")
 
 
+class GetIPinfo:
+    """
+    IP测试类，
+    """
+    def __init__(self, url):
+        self.url = url
+        
+    def getstatus(self):
+        try:
+            res = requests.get(self.url)
+            res.status_code == 200
+            res.encoding = "utf-8"
+            # print(res.text)
+            return res.text
+        except Exception as err:
+            print(err)
+        
+    def getpageinfo_etree(self):
+        """
+        使用lxml的etree解析。
+        """
+        page = etree.HTML(self.getstatus())
+        response = page.xpath(".//div[@class='data kq-well']//pre//text()")
+        # print(response)
+        try:
+            result = re.sub("/n", " ", response[0])
+            print(result)
+        except Exception as err:
+            print(err)
+            
+
+class UseQuerymodel(GetIPinfo):
+    """
+    使用pyquery请求解析网页！
+    """
+    def __init__(self, url):
+        self.url = url
+    
+    def sendRequest(self):
+        pass
+    
+    def parseHtml(self):
+        pass 
+
+
 def main():
     t1 = time.time()
     l = [1, 2, 12, 14, 54, 9, 0, 10, 12, 11]
