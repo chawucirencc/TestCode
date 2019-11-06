@@ -16,6 +16,7 @@ import requests
 import threading
 import matplotlib.pyplot as plt
 from lxml import etree
+from pyquery import PyQuery as pq
 from pathlib import Path
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -708,7 +709,10 @@ class UseQuerymodel(GetIPinfo):
         self.url = url
     
     def sendRequest(self):
-        pass
+        response = pq(self.url)
+        print(type(response))
+        print(response)
+        
     
     def parseHtml(self):
         pass 
