@@ -713,7 +713,6 @@ class UseQuerymodel(GetIPinfo):
         print(type(response))
         print(response)
         
-    
     def parseHtml(self):
         pass 
 
