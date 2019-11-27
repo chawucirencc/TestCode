@@ -184,6 +184,8 @@ class GetNumber(GetIPinfo):
     def select_data(self):
         """
         查询所有数据，可以将其转化成list。
+        关于使用SQL更新数据的方法，在下面的方法中就是将所有的的数据添加到一个列表当中，然后判断新得到的是否在这个列表当中，如果存在那么就跳过，
+        如果不存在那就添加到数据库中。随着数据量的增加，列表的占用空间也会越来越大，性能消耗会比较严重。
         """
         db = pymysql.connect(host="localhost", user="root", password="password", database="world")
         db_curs = db.cursor()
