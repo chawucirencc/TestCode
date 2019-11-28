@@ -165,62 +165,60 @@ class GetNumber(GetIPinfo):
         """
         连接数据库，将得到的数据写入到MySQL中。
         """
+        a = 0
         for i in self.process_pageinfo():
-            print(i)
-        #     db = pymysql.connect(host="localhost", user="root", password="password", database="world")
-        #     db_curs = db.cursor()
-        #     insert_sql = """INSERT INTO number(一, 二, 三, 四, 五, 六, 蓝) VALUES (%s, %s, %s, %s, %s, %s, %s);"""
-        #     data = [i] 
-        #     # print(data)
-        #     try:
-        #         db_curs.executemany(insert_sql, data)
-        #         db.commit()
-        #         print("OK")
-        #     except Exception as err:
-        #         db.rollback()
-        #         print("insert error", err)            
-        # db_curs.close()
-    
+            # print(i)
+            if i not in self.select_data():
+                db = pymysql.connect(host="localhost", user="root", password="password", database="world")
+                db_curs = db.cursor()
+                insert_sql = """INSERT INTO number(A, B, C, D, E, F, G) VALUES (%s, %s, %s, %s, %s, %s, %s);"""
+                data = [i] 
+                # print(data)
+                try:
+                    db_curs.executemany(insert_sql, data)
+                    db.commit()
+                    print("OK", i)
+                except Exception as err:
+                    db.rollback()
+                    print("insert error", err)    
+            else:
+                print("已存在", i)
+                a += 1
+                if a == 3:
+                    break
+                continue  
+            db_curs.close()
+            
     def select_data(self):
         """
         查询所有数据，可以将其转化成list。
         关于使用SQL更新数据的方法，在下面的方法中就是将所有的的数据添加到一个列表当中，然后判断新得到的是否在这个列表当中，如果存在那么就跳过，
-        如果不存在那就添加到数据库中。随着数据量的增加，列表的占用空间也会越来越大，性能消耗会比较严重。
+        如果不存在那就添加到数据库中。随着数据量的增加，列表的占用空间也会越来越大，性能消耗会比较严重。每次判断都会进行MySQL的查询。
         """
         db = pymysql.connect(host="localhost", user="root", password="password", database="world")
         db_curs = db.cursor()
-        select_sql = "SELECT G, COUNT(*) as 总计 FROM number GROUP BY G ORDER BY COUNT(*) DESC;"
-        select_sql_1 = """SELECT `序号` FROM number WHERE A = 4 AND B = 6 AND C = 11 AND D = 14 AND E = 19 AND F = 33 AND G = 7 
-                LIMIT 1;"""
         select_all = "select * from number;"
         db_curs.execute(select_all)
         result = db_curs.fetchall()
         result_lsit = [] # 将所有数据存到列表中有20k的大小。
         for i in result:
             result_lsit.append(list(i[1:]))
-        # print(result)
-        # print(len(result))
-        # print(type(result))
-        print(sys.getsizeof(result_lsit))
-        print(result_lsit[:10])
-        return result_lsit
-    
-    def update_data(self):
-        for s in self.process_pageinfo():
-            print(s)
-            sql = "SELECT `序号` FROM number WHERE A = s[0] AND B = s[1] AND C = s[2] AND D = s[3] AND E = s[4] AND F = s[5] AND G = s[6] LIMIT 1;"
-            if len(self.select_data(select_sql=sql)) != 1:
-                pass      
+        return result_lsit    
         
         
 def use_getnumber():
+    s = 0
     for i in range(1, 126):
-        url = "http://kaijiang.zhcw.com/zhcw/html/ssq/list_"+str(i)+".html"
-        an = GetNumber(url)
-        an.process_pageinfo()
-        an.connection_sql()
-        # an.update_data()
-        time.sleep(2)
+        s += 1
+        if s < 4:
+            print("第{0}页前三项".format(s))
+            url = "http://kaijiang.zhcw.com/zhcw/html/ssq/list_"+str(i)+".html"
+            an = GetNumber(url)
+            an.connection_sql()
+            time.sleep(2)
+        else:
+            break
+        
 
 
 class ConnectionSql():
@@ -272,9 +270,9 @@ class AnalysisNumber():
     
 def main():
     t1 = time.time()
-    # use_getnumber()
-    analysis = AnalysisNumber()
-    analysis.select_data()
+    use_getnumber()
+    # analysis = AnalysisNumber()
+    # analysis.select_data()
     print(time.time()-t1)
     
 if __name__ == "__main__":
