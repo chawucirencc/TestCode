@@ -207,6 +207,9 @@ class GetNumber(GetIPinfo):
         
         
 def use_getnumber():
+    """
+    在需要更新数据的时候运行程序，只会显示OK和已存在两种情况，如果连续三页的前三个都是已存在的状态，则说明没有数据需要更新了，那么就退出程序。
+    """
     s = 0
     for i in range(1, 126):
         s += 1
@@ -220,7 +223,6 @@ def use_getnumber():
             break
         
 
-
 class ConnectionSql():
     def __init__(self, host, username, password, database):
         self.host = host
@@ -230,7 +232,6 @@ class ConnectionSql():
         
     def select_data(self):
       pass
-  
     
 
 class AnalysisNumber():
