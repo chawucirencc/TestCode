@@ -248,7 +248,7 @@ class AnalysisNumber():
         select_sql = "SELECT G, COUNT(*) as 总计 FROM number GROUP BY G ORDER BY COUNT(*) DESC;"
         select_sql_1 = """SELECT `序号` FROM number WHERE A = 4 AND B = 6 AND C = 11 AND D = 14 AND E = 19 AND F = 33 AND G = 7 
                 LIMIT 1;"""
-        select_all = "select * from number;"
+        select_all = "select * from number;" 
         db_curs.execute(select_all)
         result = db_curs.fetchall()
         result_lsit = [] # 将所有数据存到列表中有20k的大小。
