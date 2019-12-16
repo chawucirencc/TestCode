@@ -22,6 +22,7 @@ class GetIPinfo:
     def getstatus(self):
         try:
             res = requests.get(self.url)
+            print(res.status_code) # 返回网页响应状态码。
             res.status_code == 200
             res.encoding = "utf-8"
             # print(res.text)
