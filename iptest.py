@@ -67,7 +67,7 @@ class UseQuerymodel(GetIPinfo):
         
 def processpageinfo(url):
     """
-    对一个功能编写成类，然后接下来使用一个访哈实例化这个类，最后在main函数中执行就行了。唯一的缺点就是在多个函数中调用。
+    对一个功能编写成类，然后接下来使用一个实例化这个类，最后在main函数中执行就行了。唯一的缺点就是在多个函数中调用。
     """
     # print("/----------------------------/")
     # ip = input("Test IP address：")
@@ -78,13 +78,14 @@ def processpageinfo(url):
     page.parseHtml()
     
 
-
 class OpenPage:
     """
-    测试selenium
+    测试selenium，
+    ChromeDriver无参数是打开浏览器会出现错误，需将最新的ChromeDriver驱动当做参数。
+    (相对位置即可！)
     """
     def openwebpage(self):
-        browser = webdriver.Chrome()
+        browser = webdriver.Chrome('chromedriver_win32\chromedriver.exe')
         browser.get('https://www.baidu.com/')
     
     def inserttext(self):
@@ -264,7 +265,7 @@ class AnalysisNumber():
     
     def plot_somenumber(self):
         x = []
-        for i in self.select_data():           
+        for i in self.select_data(): 
             print(i[1]/2491)
             x.append(i[1]/2491)
         print(x)
@@ -274,6 +275,7 @@ class AnalysisNumber():
 def main():
     t1 = time.time()
     use_getnumber()
+    # opwindow()
     # analysis = AnalysisNumber()
     # analysis.select_data()
     print(time.time()-t1)
