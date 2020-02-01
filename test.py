@@ -5,6 +5,8 @@ import json
 import time
 import lxml
 import redis
+import jieba
+import pkuseg
 import pprint
 import random
 import pymongo
@@ -559,6 +561,9 @@ def mutil_process_2():
     
 
 def mutil_process():
+    """
+    多线程测试
+    """
     mutil_process_1()
     mutil_process_2()
     # t1 = threading.Thread(target=mutil_process_1, name='mutil_process_thread_1')
@@ -570,6 +575,9 @@ def mutil_process():
 
 
 def sele():
+    """
+    selenium测试
+    """
     driver = webdriver.Chrome()
     driver.get("https://www.baidu.com/")
     # driver.close()
@@ -717,11 +725,18 @@ class UseQuerymodel(GetIPinfo):
         pass 
 
 
+def use_pkuseg():
+    # seg=pkuseg.pkuseg()
+    # text=seg.cut('中华人民共和国今天成立了！')
+    text=jieba.cut('中华人民共和国今天成立了！')
+    print('、'.join(text))
+
 def main():
     t1 = time.time()
-    l = [1, 2, 12, 14, 54, 9, 0, 10, 12, 11]
+    # l = [1, 2, 12, 14, 54, 9, 0, 10, 12, 11]
     # s = '+-+++-+++---+-+-++++--'
-    find_er_num()
+    # find_er_num()
+    use_pkuseg()
     t2 = time.time() - t1
     print(t2)
 
